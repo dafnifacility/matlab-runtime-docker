@@ -16,10 +16,11 @@ WORKDIR /matlab-runtime
 RUN wget https://ssd.mathworks.com/supportfiles/downloads/R2020a/Release/5/deployment_files/installer/complete/glnxa64/MATLAB_Runtime_R2020a_Update_5_glnxa64.zip && \
     unzip MATLAB_Runtime_R2020a_Update_5_glnxa64.zip && \
     rm -rf MATLAB_Runtime_R2020a_Update_5_glnxa64.zip && \
-    ./install -destinationFolder /opt/matlab-runtime -agreeToLicense yes -mode silent -outputFile /log.txt
+    ./install -destinationFolder /opt/matlab-runtime -agreeToLicense yes -mode silent -outputFile /log.txt $$ \
+    rm -rf /matlab-runtime
 
 # Point to the newly installed Matlab runtime binaries
-ENV LD_LIBRARY_PATH /opt/matlab-runtime/v98:/opt/matlab-runtime/v98/runtime/glnxa64:/opt/matlab-runtime/v98/bin/glnxa64:/opt/matlab-runtime/v98/sys/os/glnxa64:/opt/matlab-runtime/v98/extern/bin/glnxa64:/opt/matlab-runtime/v98/sys/opengl/lib/glnxa64
+ENV LD_LIBRARY_PATH /opt/matlab-runtime/v98:/opt/matlab-runtime/v98/runtime/glnxa64:/opt/matlab-runtime/v98/bin/glnxa64:/opt/matlab-runtime/v98/sys/os/glnxa64:/opt/matlab-runtime/v98/sys/opengl/lib/glnxa64:/opt/matlab-runtime/v98/extern/bin/glnxa64
 
 WORKDIR /code/model
 
